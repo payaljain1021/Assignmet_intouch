@@ -1,0 +1,155 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+      
+      <div class="card">
+        <div class="card-header">
+          <h1 class="" align="center" style="padding:10px"
+          >Contact</h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-header color" >
+                        <h3 class="card-title" align="center" style="padding:10px"
+                        >Contact List</h3>
+                    </div>
+                    <div class="col-md-6" style="padding: 2px">
+                      <mat-form-field style="width: 50%">
+                          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+                      </mat-form-field>
+                  </div>
+                    <div class="card-body">
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                        <ng-container matColumnDef="id">
+                          <th mat-header-cell *matHeaderCellDef> No. </th>
+                          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                        </ng-container>
+                      
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="name">
+                          <th mat-header-cell *matHeaderCellDef> Name </th>
+                          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        </ng-container>
+                      
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="username">
+                          <th mat-header-cell *matHeaderCellDef> username </th>
+                          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+                        </ng-container>
+                      
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="email">
+                          <th mat-header-cell *matHeaderCellDef> email </th>
+                          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="phone">
+                          <th mat-header-cell *matHeaderCellDef> phone </th>
+                          <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="website">
+                          <th mat-header-cell *matHeaderCellDef> website </th>
+                          <td mat-cell *matCellDef="let element"> {{element.website}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="company">
+                          <th mat-header-cell *matHeaderCellDef> company </th>
+                          <td mat-cell *matCellDef="let element"> {{element.company.name}} </td>
+                        </ng-container>
+        
+                        <!-- s -->
+                      
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                        style="cursor:pointer;"  class="table mat-table-hover"
+                        (click)="showDetail(row)" ></tr>
+                    </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+
+              <style>
+                #view-source {
+                  position: fixed;
+                  z-index: 999;
+                  display: block;
+                  right: 30px;
+                 top: 122px;
+                }
+              </style>
+                <div class="card">
+                  <div class="card-header color" >
+                    <h3 class="card-title" align="center" style="padding:10px"
+                    >Contact Details</h3>
+                </div>
+                <div  class="mat-fab b1" id="view-source">
+                  <i class="material-icons" role="presentation"
+                  (click)="editDetails(contact_detail)">edit</i>
+                  <span class="visuallyhidden"></span>
+                </div>
+
+                  <div class="card" *ngIf="edit_toggle === false">
+                    <img src="https://mdbootstrap.com/img/Others/documentation/img%20(28)-mini.jpg" alt="John"
+                      class="rounded-circle">
+                    <h1>{{contact_detail.name}}</h1>
+                    <p class="title">Email - {{contact_detail.email}}</p>
+                    <p >Phone- {{contact_detail.phone}}</p>
+                    <p >Website- {{contact_detail.website}}</p>
+                    <!-- <p >Company- {{contact_detail.company.name}}</p> -->
+                    <p><button>Contact</button></p>
+                  </div>
+
+                  <div class="card" *ngIf="edit_toggle === true">
+                    <img src="https://mdbootstrap.com/img/Others/documentation/img%20(28)-mini.jpg" alt="John"
+                      class="rounded-circle">
+                    <form [formGroup]="form" (ngSubmit)="submitEditData()">
+                      <h1>
+                      <mat-form-field >
+                      <input matInput name="name" placeholder="Name" formControlName="name"
+                       value={{contact_detail.name}}>
+                      <mat-icon matSuffix></mat-icon>
+                    </mat-form-field>
+                   </h1>
+                    <p >
+                      <mat-form-field >
+                        <input matInput name="email" placeholder="email" formControlName="email"
+                        value={{contact_detail.email}}>
+                        <mat-icon matSuffix></mat-icon>
+                      </mat-form-field>
+                    </p>
+                    <p >
+                      <mat-form-field >
+                        <input matInput name="phone" placeholder="phone" formControlName="phone"
+                         value={{contact_detail.phone}}>
+                        <mat-icon matSuffix></mat-icon>
+                      </mat-form-field>
+                    </p>
+                    <p >
+                      <mat-form-field >
+                        <input matInput name="website" placeholder="website" formControlName="website"
+                        value={{contact_detail.website}}>
+                        <mat-icon matSuffix></mat-icon>
+                      </mat-form-field>
+                    </p>
+                    <!-- <p >
+                      <mat-form-field >
+                        <input matInput name="company" placeholder="company" formControlName="name"
+                        value={{contact_detail.company.name}}>
+                        <mat-icon matSuffix></mat-icon>
+                      </mat-form-field>
+                    </p> -->
+                    <button >Edit</button>
+                </form>
+                  </div>
+
+                  
+
+                </div>
+            </div>
+        </div>
+      </div>
+     </div>
+  </div>
